@@ -30,8 +30,9 @@ public abstract class GestorProceso {
 		InformacionCicloCPU iCPU;
 		buscarNuevosProcesos();
 		procesoActual = seleccionarProceso();
-		iCPU = new InformacionCicloCPU(procesoActual, cicloCPU++, colaProcesos);
+		iCPU = new InformacionCicloCPU(procesoActual, cicloCPU, colaProcesos);
 		ejecutarProceso();
+		cicloCPU++;
 		return iCPU;
 	}
 	

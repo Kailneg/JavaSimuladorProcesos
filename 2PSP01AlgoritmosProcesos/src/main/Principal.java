@@ -1,10 +1,7 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import algoritmos.GestorFIFO;
-import algoritmos.GestorLIFO;
+import algoritmos.*;
 import models.InformacionCicloCPU;
 import models.Proceso;
 import models.ProcesoPrioridad;
@@ -15,13 +12,13 @@ public class Principal {
 		
 		//Generando procesos
 		//						llegada, ciclosCarga
-		Proceso p1 = new Proceso("A", 2, 3, ProcesoPrioridad.ALTA);
-		Proceso p2 = new Proceso("B", 1, 3, ProcesoPrioridad.ALTA);
+		Proceso p1 = new Proceso("A", 0, 3, ProcesoPrioridad.ALTA);
+		Proceso p2 = new Proceso("B", 0, 2, ProcesoPrioridad.ALTA);
 		Proceso p3 = new Proceso("C", 0, 3, ProcesoPrioridad.ALTA);
 		
 		ArrayList<Proceso> listaProcesos = new ArrayList<>();
 		
-		GestorLIFO gestor = new GestorLIFO(listaProcesos);
+		GestorSPF gestor = new GestorSPF(listaProcesos);
 		InformacionCicloCPU iCPU;
 		
 		listaProcesos.add(p1);
