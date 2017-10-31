@@ -15,13 +15,13 @@ public class GestorFIFO extends GestorProceso {
 	 */
 	@Override
 	protected Proceso seleccionarProceso() {
-		
 		// Según FIFO, eligiremos el primer proceso de la cola de procesos.
-		// (El que primero llegó)
+		// (El que primero llegó), siempre que no haya ya uno ejecutándose.
+		if (procesoActual != null)
+			return procesoActual;
 		if (!colaProcesos.isEmpty())
 			return colaProcesos.get(0);
 		return null;
 	}
-
 	
 }

@@ -27,10 +27,12 @@ public abstract class GestorProceso {
 	public InformacionCicloCPU cicloProcesamiento() {
 		// Orden del procesamiento
 		// Busco por nuevos que hayan entrado > selecciono > proceso
+		InformacionCicloCPU iCPU;
 		buscarNuevosProcesos();
 		procesoActual = seleccionarProceso();
+		iCPU = new InformacionCicloCPU(procesoActual, cicloCPU++, colaProcesos);
 		ejecutarProceso();
-		return new InformacionCicloCPU(procesoActual, cicloCPU++, colaProcesos);
+		return iCPU;
 	}
 	
 	/**
@@ -72,8 +74,11 @@ public abstract class GestorProceso {
 			procesoActual.procesar();				
 			
 			// Si al proceso actual no le quedan ciclos restantes, entonces eliminar de la cola.
-			if (!procesoActual.tieneCargaRestante())
+			// Y setear el proceso actual a null
+			if (!procesoActual.tieneCargaRestante()){
 				colaProcesos.remove(procesoActual);
+				procesoActual = null;
+			}
 			
 			return true; // Ha existido un proceso y se ha ejecutado
 		}
