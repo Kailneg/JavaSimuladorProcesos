@@ -12,11 +12,10 @@ public abstract class GestorProceso {
 	protected Proceso procesoActual;
 	protected int cicloCPU;
 
-	public GestorProceso(ArrayList<Proceso> listaProcesos) {
+	protected GestorProceso(ArrayList<Proceso> listaProcesos) {
 		this.listaProcesosInicial = listaProcesos;
 		colaProcesos = new ArrayList<>();
 		cicloCPU = 0;
-		procesoActual = seleccionarProceso();
 	}
 	
 	/**

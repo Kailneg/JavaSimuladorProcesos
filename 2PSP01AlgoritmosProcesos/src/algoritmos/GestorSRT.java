@@ -6,6 +6,13 @@ import models.Proceso;
 
 public class GestorSRT extends GestorProceso {
 
+	/**
+	 * Crea un nuevo gestor que usará el algoritmo <b>SRT</b> para ejecutar los
+	 * procesos que se le pasen.
+	 * 
+	 * @param listaProcesos
+	 *            la lista que se procesará
+	 */
 	public GestorSRT(ArrayList<Proceso> listaProcesos) {
 		super(listaProcesos);
 	}

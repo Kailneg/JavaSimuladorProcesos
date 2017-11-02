@@ -6,6 +6,13 @@ import models.Proceso;
 
 public class GestorSJF extends GestorProceso {
 
+	/**
+	 * Crea un nuevo gestor que usará el algoritmo <b>SJF</b> para ejecutar los
+	 * procesos que se le pasen.
+	 * 
+	 * @param listaProcesos
+	 *            la lista que se procesará
+	 */
 	public GestorSJF(ArrayList<Proceso> listaProcesos) {
 		super(listaProcesos);
 	}

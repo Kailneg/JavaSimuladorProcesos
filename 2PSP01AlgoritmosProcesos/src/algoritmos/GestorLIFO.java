@@ -6,6 +6,13 @@ import models.Proceso;
 
 public class GestorLIFO extends GestorProceso {
 
+	/**
+	 * Crea un nuevo gestor que usará el algoritmo <b>LIFO</b> para ejecutar los
+	 * procesos que se le pasen.
+	 * 
+	 * @param listaProcesos
+	 *            la lista que se procesará
+	 */
 	public GestorLIFO(ArrayList<Proceso> listaProcesos) {
 		super(listaProcesos);
 	}
@@ -25,7 +32,8 @@ public class GestorLIFO extends GestorProceso {
 		// Obtiene el último de la cola temporal
 		if (!colaProcesos.isEmpty())
 			return colaProcesos.get(colaProcesos.size() - 1); 
-		return null;
+		
+		return null; // Si no existen procesos actualmente en la cola temporal
 	}
 
 }
