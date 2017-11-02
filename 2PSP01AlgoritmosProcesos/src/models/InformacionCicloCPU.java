@@ -39,7 +39,7 @@ public class InformacionCicloCPU {
 
 	@Override
 	public String toString() {
-		return "InformacionCicloCPU: CicloCPU[" + cicloCPU + "]->" + procesoActual;
+		return "InfoCPU: Ciclo[" + cicloCPU + "]->" + procesoActual;
 	}
 
 }
