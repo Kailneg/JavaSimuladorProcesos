@@ -27,13 +27,9 @@ public abstract class GestorProceso {
 	public InformacionCicloCPU cicloProcesamiento() {
 		// Orden del procesamiento
 		// Busco por nuevos que hayan entrado > selecciono > proceso
-		InformacionCicloCPU iCPU;
 		buscarNuevosProcesos();
 		procesoActual = seleccionarProceso();
-		iCPU = new InformacionCicloCPU(procesoActual, cicloCPU, colaProcesos);
-		ejecutarProceso();
-		cicloCPU++;
-		return iCPU;
+		return ejecutarProceso();
 	}
 	
 	/**
@@ -62,17 +58,20 @@ public abstract class GestorProceso {
 	/**
 	 * Ejecuta un ciclo del proceso actual, si existe un proceso ejecutable
 	 * disponible para ese ciclo de CPU. Será igual para todos.
-	 * @return devuelve true si se ha ejecutado un proceso existente. 
+	 * @return devuelve un objeto tipo InformacionCicloCPU con
+	 * toda la información sobre el procesamiento
 	 */
-	public boolean ejecutarProceso() {
+	protected InformacionCicloCPU ejecutarProceso() {
+		InformacionCicloCPU iCPU;
 		if (procesoActual != null) {
 			// Seteando el momento de entrada a ejecución del proceso,
 			// en caso de que sea la primera vez que entra.
 			if (procesoActual.getCicloEntrada() == -1) {
 				procesoActual.setCicloEntrada(cicloCPU);
 			}
-			// Entonces procesamos
-			procesoActual.procesar();				
+			// Entonces procesamos y guardamos los parametros
+			procesoActual.procesar();	
+			iCPU = new InformacionCicloCPU(procesoActual, cicloCPU, colaProcesos);
 			
 			// Si al proceso actual no le quedan ciclos restantes, entonces eliminar de la cola.
 			// Y setear el proceso actual a null
@@ -81,9 +80,12 @@ public abstract class GestorProceso {
 				procesoActual = null;
 			}
 			
-			return true; // Ha existido un proceso y se ha ejecutado
+			// Ha existido un proceso y se ha ejecutado
+		} else {
+			iCPU = new InformacionCicloCPU(null, cicloCPU, colaProcesos); // No ha habido proceso para ejecutarse
 		}
-		return false; // No ha habido proceso para ejecutarse
+		cicloCPU++;
+		return iCPU;
 	}
 	
 	/**

@@ -10,14 +10,21 @@ public class GestorLIFO extends GestorProceso {
 		super(listaProcesos);
 	}
 
+	/**
+	 * Según Last In First Out, se elige el último proceso que llegó. 
+	 * No es apropiativo
+	 * 
+	 * @return el proceso que se debe ejecutar en este ciclo de CPU.
+	 */
 	@Override
 	protected Proceso seleccionarProceso() {
-		// Según LIFO, eligiremos el último proceso de la cola de procesos.
-		// (El último que llegó), siempre que no haya ya uno ejecutándose.
+		// No apropiativo, comprobamos que no haya uno ya ejecutándose.
 		if (procesoActual != null)
 			return procesoActual;
+		
+		// Obtiene el último de la cola temporal
 		if (!colaProcesos.isEmpty())
-			return colaProcesos.get(colaProcesos.size() - 1); // Obtiene el último
+			return colaProcesos.get(colaProcesos.size() - 1); 
 		return null;
 	}
 

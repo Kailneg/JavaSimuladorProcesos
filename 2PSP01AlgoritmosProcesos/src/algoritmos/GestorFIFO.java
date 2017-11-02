@@ -11,14 +11,19 @@ public class GestorFIFO extends GestorProceso {
 	}
 
 	/**
-	 * Será null si no existe un proceso disponible para el ciclo actual de CPU.
+	 * Según First In First Out, se elige el último proceso que llegó. 
+	 * No es apropiativo
+	 * 
+	 * @return el proceso que se debe ejecutar en este ciclo de CPU.
 	 */
 	@Override
 	protected Proceso seleccionarProceso() {
-		// Según FIFO, eligiremos el primer proceso de la cola de procesos.
-		// (El que primero llegó), siempre que no haya ya uno ejecutándose.
+		
+		// No apropiativo, comprobamos que no haya uno ya ejecutándose.
 		if (procesoActual != null)
 			return procesoActual;
+		
+		// Obtiene el primero de la cola temporal
 		if (!colaProcesos.isEmpty())
 			return colaProcesos.get(0);
 		return null;
