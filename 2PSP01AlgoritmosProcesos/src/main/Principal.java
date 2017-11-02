@@ -33,9 +33,9 @@ public class Principal implements Runnable {
 		// Generando y añadiendo procesos a la lista.
 		//							->llegada,ciclosCarga
 		listaProcesos.add(new Proceso("A", 4, 1, ProcesoPrioridad.BAJA));
-		listaProcesos.add(new Proceso("B", 0, 5, ProcesoPrioridad.BAJA));
+		listaProcesos.add(new Proceso("B", 0, 5, ProcesoPrioridad.MEDIA));
 		listaProcesos.add(new Proceso("C", 1, 3, ProcesoPrioridad.ALTA));
-		listaProcesos.add(new Proceso("D", 8, 6, ProcesoPrioridad.ALTA));
+		listaProcesos.add(new Proceso("D", 8, 6, ProcesoPrioridad.MEDIA));
 		listaProcesos.add(new Proceso("E", 9, 2, ProcesoPrioridad.ALTA));
 
 		// Mostrar al usuario información sobre los procesos
@@ -96,8 +96,11 @@ public class Principal implements Runnable {
 		}
 		System.out.println(mensaje);
 		// Mientras quede trabajo por hacer, ejecutar ciclos de procesamiento.
-		while (gestor.quedaTrabajo()) 
-			System.out.println(gestor.cicloProcesamiento());
+		while (gestor.quedaTrabajo()){
+			InformacionCicloCPU iCPU = gestor.cicloProcesamiento();
+			System.out.println(iCPU.getProcesoActual() == null ? 
+					"InfoCPU: Ciclo[" + iCPU.getCicloCPU() + "] Esperando..." : iCPU);
+		}
 	}
 
 	private int leerInt() {
